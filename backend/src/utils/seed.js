@@ -9,7 +9,7 @@ const Violation = require('../models/Violation');
 const Camera = require('../models/Camera');
 const bcrypt = require('bcrypt');
 
-dotenv.config({ path: '../../.env' });
+dotenv.config();
 
 const seedDatabase = async () => {
   try {
@@ -30,7 +30,7 @@ const seedDatabase = async () => {
     await User.create({
       name: 'Admin User',
       email: 'admin@example.com',
-      password: await bcrypt.hash('admin123', 10),
+      password: 'admin123',
       role: 'ADMIN',
       phone: '9999999999',
     });
@@ -61,7 +61,7 @@ const seedDatabase = async () => {
       const user = await User.create({
         name: `Inspector ${i+1}`,
         email: `inspector${i+1}@example.com`,
-        password: await bcrypt.hash('inspector123', 10),
+        password: 'inspector123',
         role: 'INSPECTOR',
         phone: `99999999${String(i).padStart(2,'0')}`,
       });
@@ -80,7 +80,7 @@ const seedDatabase = async () => {
     await User.create({
       name: 'Institution User',
       email: 'institution@example.com',
-      password: await bcrypt.hash('institution123', 10),
+      password: 'institution123',
       role: 'INSTITUTION',
       phone: '8888888888',
       institutionId: institutions[0]._id,
