@@ -1,5 +1,0 @@
-.header { display:flex; justify-content:space-between; align-items:center; padding:0.5rem 2rem; background:#1a237e; color:white; }
-.logo { font-size:1.2rem; font-weight:bold; }
-.nav-links a { color:white; margin:0 1rem; text-decoration:none; }
-.user-info { display:flex; align-items:center; gap:1rem; }
-.user-info button { background:#ff5252; border:none; padding:0.3rem 0.8rem; border-radius:4px; color:white; cursor:pointer; width:auto; }
