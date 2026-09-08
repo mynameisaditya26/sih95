@@ -1,0 +1,16 @@
+const express = require('express');
+const { getInspections, getInspectionById, createInspection, updateInspection, deleteInspection, createSurpriseInspection, verifyGPS, startInspection, updateChecklist, approveInspection, rejectInspection, escalateInspection } = require('../controllers/inspectionController');
+const { protect } = require('../middleware/authMiddleware');
+const { roleMiddleware } = require('../middleware/roleMiddleware');
+const router = express.Router();
+router.use(protect);
+router.post('/surprise', roleMiddleware('ADMIN'), createSurpriseInspection);
+router.post('/:id/gps', roleMiddleware('INSPECTOR'), verifyGPS);
+router.post('/:id/start', roleMiddleware('INSPECTOR'), startInspection);
+router.put('/:id/checklist', roleMiddleware('INSPECTOR'), updateChecklist);
+router.post('/:id/approve', roleMiddleware('ADMIN'), approveInspection);
+router.post('/:id/reject', roleMiddleware('ADMIN'), rejectInspection);
+router.post('/:id/escalate', roleMiddleware('ADMIN'), escalateInspection);
+router.route('/').get(getInspections).post(roleMiddleware('ADMIN'), createInspection);
+router.route('/:id').get(getInspectionById).put(updateInspection).delete(roleMiddleware('ADMIN'), deleteInspection);
+module.exports = router;

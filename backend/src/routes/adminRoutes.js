@@ -1,0 +1,11 @@
+const express = require('express');
+const { getDashboardStats, getTrends, getAnalytics } = require('../controllers/adminController');
+const { protect } = require('../middleware/authMiddleware');
+const { roleMiddleware } = require('../middleware/roleMiddleware');
+const router = express.Router();
+router.use(protect);
+router.use(roleMiddleware('ADMIN'));
+router.get('/dashboard', getDashboardStats);
+router.get('/trends', getTrends);
+router.get('/analytics', getAnalytics);
+module.exports = router;

@@ -1,0 +1,11 @@
+const express = require('express');
+const { getViolations, getViolationById, createViolation, updateViolation, escalateViolation, resolveViolation } = require('../controllers/violationController');
+const { protect } = require('../middleware/authMiddleware');
+const { roleMiddleware } = require('../middleware/roleMiddleware');
+const router = express.Router();
+router.use(protect);
+router.route('/').get(getViolations).post(roleMiddleware('INSPECTOR','ADMIN'), createViolation);
+router.route('/:id').get(getViolationById).put(roleMiddleware('ADMIN'), updateViolation);
+router.post('/:id/escalate', roleMiddleware('ADMIN'), escalateViolation);
+router.post('/:id/resolve', roleMiddleware('INSTITUTION'), resolveViolation);
+module.exports = router;

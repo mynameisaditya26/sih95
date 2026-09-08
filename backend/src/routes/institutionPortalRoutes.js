@@ -1,0 +1,13 @@
+const express = require('express');
+const { getProfile, getInspections, getViolations, getCorrectiveActions, submitCorrectiveAction } = require('../controllers/institutionPortalController');
+const { protect } = require('../middleware/authMiddleware');
+const { roleMiddleware } = require('../middleware/roleMiddleware');
+const router = express.Router();
+router.use(protect);
+router.use(roleMiddleware('INSTITUTION'));
+router.get('/profile', getProfile);
+router.get('/inspections', getInspections);
+router.get('/violations', getViolations);
+router.get('/corrective-actions', getCorrectiveActions);
+router.post('/corrective-actions', submitCorrectiveAction);
+module.exports = router;
