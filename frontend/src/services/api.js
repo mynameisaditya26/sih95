@@ -1,13 +1,16 @@
 import axios from 'axios'
 
+// Works both in Docker and local development
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
 })
 
-// Automatically attach JWT token to every request
+// Attach JWT automatically
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token')
@@ -19,7 +22,7 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 )
 
-// Handle 401 (unauthorized) globally
+// Global 401 handler
 api.interceptors.response.use(
   (response) => response,
   (error) => {
