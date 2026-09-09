@@ -114,10 +114,17 @@ export default function DashboardLayout() {
             <Menu size={22} />
           </button>
 
-          <div className="hidden md:flex relative flex-1 max-w-md">
-            <Search size={16} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink-400" />
-            <input placeholder="Search projects, inspections, inspectors…" className="input pl-9 bg-ink-50 border-transparent focus:bg-white" />
+          {/* ===== FIXED SEARCH BAR ===== */}
+          <div className="hidden md:flex relative flex-1 max-w-md items-center">
+            <span className="pointer-events-none absolute left-3 top-1/2 z-10 -translate-y-1/2 text-ink-400">
+              <Search size={16} strokeWidth={2} />
+            </span>
+            <input
+              placeholder="Search projects, inspections, inspectors…"
+              className="input w-full pl-10 pr-3 bg-ink-50 border-transparent focus:bg-white"
+            />
           </div>
+          {/* ===== END FIXED SEARCH BAR ===== */}
 
           <div className="flex-1 md:hidden" />
 
